@@ -1,150 +1,89 @@
-# EC_XR_SanchezDeyvi
+# EC_XR_SanchezDeyvi - XR Interaction Challenge
 
-Proyecto de Unity con **Universal Render Pipeline (URP)**.
+## Información del Estudiante
+- **Apellidos y Nombres:** Sanchez Deyvi
+- **Código del Estudiante:** [Tu código aquí]
+- **Curso:** Laboratorio de Realidad Extendida (XR) para Videojuegos
+- **Docente:** Victor Alejandro Arroyo Castro
 
-> **Estado:** proyecto inicializado desde la plantilla 3D Cross Platform. Aún no hay
-> contenido de juego developed; la base de render, input y settings está configurada.
+## Descripción del Proyecto
+Este proyecto es una experiencia interactiva de Realidad Extendida (XR) desarrollada en Unity que integra los conocimientos trabajados durante las sesiones 1, 2 y 3: configuración del entorno XR, integración de herramientas de realidad aumentada/virtual e interacción mediante XR Interaction Toolkit.
 
----
+El escenario representa una pequeña sala de entrenamiento XR con objetos manipulables, interacciones a distancia mediante rayos y un sistema de teletransporte.
 
-## Requisitos
+## Funcionalidades Implementadas
 
-| Componente | Versión |
-|---|---|
-| Unity Editor | `6000.3.10f1` (Unity 6.3) |
-| Render Pipeline | Universal RP `17.3.0` |
-| Input System | `1.18.0` |
-| .NET (Scripting Runtime) | .NET Standard 2.1 |
+### 1. Configuración del Proyecto (4 puntos)
+- Proyecto Unity configurado con Universal Render Pipeline (URP)
+- XR Plugin Management con OpenXR
+- XR Interaction Toolkit 3.3.2
+- Input System integrado
+- El proyecto ejecuta sin errores
 
-**Importante:** todos los colaboradores deben usar **exactamente la misma versión**
-de Unity (ver `ProjectSettings/ProjectVersion.txt`). Las versiones de Unity no son
-compatibles hacia atrás en los assets serializados.
+### 2. Escenario XR (3 puntos)
+- Escena denominada `EC_XR_SanchezDeyvi`
+- Piso de 10x10 unidades
+- Iluminación direccional + ambiental
+- 4 paredes como límites visuales
+- 6 objetos 3D: Cubo rojo, Esfera azul, Cilindro verde, Cápsula amarilla, Llave morada, Mesa
 
----
+### 3. Interacción con Objetos (5 puntos)
+- **Cubo rojo** y **Esfera azul** manipulables con `XRGrabInteractable`
+- Componentes `Rigidbody` para física
+- **Llave morada** también manipulable
+- Los objetos se pueden agarrar, mover y soltar
 
-## Cómo abrir el proyecto
+### 4. Interacción a Distancia (3 puntos)
+- **Interruptor de luz** en la pared norte
+- Interacción mediante rayo (`XRRayInteractor`)
+- Permite encender/apagar la luz de la escena
+- Cambia el color del interruptor (blanco = encendido, gris = apagado)
 
-1. Instalar Unity Hub y añadir la versión `6000.3.10f1`.
-2. Clonar el repositorio.
-3. En Unity Hub: **Add → disco local** y seleccionar la carpeta del proyecto.
+### 5. Reto Libre (2 puntos)
+- **Teletransporte**: Área de teletransporte en el suelo (plano azul semitransparente)
+- Sistema de locomoción con `TeleportationProvider`
+- **Snap Turn**: Rotación de 45° con el stick del controlador
 
-La primera apertura tarda varios minutos: Unity reimporta assets y compila todos
-los scripts. Es normal.
+## Controles e Instrucciones
 
----
+### En Unity Editor (Simulación)
+1. Abrir la escena `Assets/Scenes/EC_XR_SanchezDeyvi.unity`
+2. Presionar Play
+3. Usar el XR Device Simulator (XRI) para simular controles
 
-## Estructura
+### En Dispositivo VR (Meta Quest, etc.)
+1. Conectar el visor VR
+2. Abrir el proyecto en Unity
+3. File > Build Settings > Build And Run
+4. **Agarrar objetos**: Botón de agarre (Grip)
+5. **Apuntar/Interactuar a distancia**: Gatillo (Trigger)
+6. **Teletransportarse**: Apuntar al área azul y presionar el botón de teletransporte
+7. **Rotar**: Stick izquierdo/derecho
 
+## Tecnologías y Paquetes Utilizados
+- **Unity 6000.3.10f1** (6.3 LTS)
+- **Universal Render Pipeline (URP)** 17.3.0
+- **XR Interaction Toolkit** 3.3.2
+- **XR Plugin Management** 4.5.4
+- **OpenXR Plugin** 1.16.1
+- **Input System** 1.18.0
+- **XR Core Utils** 2.5.1
+
+## Estructura del Proyecto
 ```
-EC_XR_SanchezDeyvi/
-├── Assets/
-│   ├── Scenes/              Escenas del proyecto
-│   │   └── SampleScene.unity
-│   ├── Settings/            Assets de configuración de URP
-│   │   ├── PC_RPAsset.asset         Render pipeline para PC
-│   │   ├── Mobile_RPAsset.asset     Render pipeline para mobile
-│   │   ├── PC_Renderer.asset
-│   │   ├── Mobile_Renderer.asset
-│   │   ├── SampleSceneProfile.asset
-│   │   └── UniversalRenderPipelineGlobalSettings.asset
-│   ├── TutorialInfo/        Assets de la plantilla (no borrar)
-│   ├── InputSystem_Actions.inputactions   Acciones de input
-│   └── Readme.asset
-├── Packages/
-│   ├── manifest.json        Dependencias del proyecto
-│   └── packages-lock.json   Versiones resueltas (NO editar a mano)
-├── ProjectSettings/         Configuración del proyecto
-├── .gitignore
-└── .gitattributes
-```
-
----
-
-## Convenciones de Git
-
-### Qué se versiona
-
-- `Assets/` — **incluyendo todos los archivos `.meta`**
-- `Packages/manifest.json` y `packages-lock.json`
-- `ProjectSettings/`
-- `.gitignore` y `.gitattributes`
-
-### Qué NO se versiona
-
-- `Library/`, `Temp/`, `Logs/`, `UserSettings/`, `Builds/` — cachés regenerables
-- `*.csproj`, `*.slnx` — generados por el IDE
-
-> **Nunca borres los `.meta`.** Son la fuente de verdad de los GUID; sin ellos Unity
-> pierde las referencias entre assets y la escena se rompe.
-
----
-
-## Git LFS
-
-El repo usa **Git LFS** para assets binarios (imágenes, audio, video, modelos 3D).
-Los archivos `.unity`, `.prefab` y `.asset` están marcados como binarios con
-mergeos personalizados para evitar conflictos de texto ilegibles.
-
-Clonar requiere LFS instalado:
-
-```powershell
-git lfs install
-git lfs pull
+Assets/
+├── Editor/
+│   └── BuildXRScene.cs          # Script de generación de escena
+├── Materials/                   # Materiales de los objetos
+├── Scenes/
+│   └── EC_XR_SanchezDeyvi.unity  # Escena principal
+├── Scripts/
+│   └── RayInteraction.cs        # Script de interacción por rayo
+├── Settings/                    # Configuración URP y XR
+└── XR/                          # Configuración XR
 ```
 
-Ver estado de LFS:
-
-```powershell
-git lfs ls-files
-```
-
----
-
-## Validación por CLI
-
-Se puede verificar que el proyecto compila **sin abrir el Editor**, útil para CI:
-
-```powershell
-$p = Start-Process "C:\Program Files\Unity\Hub\Editor\6000.3.10f1\Editor\Unity.exe" `
-  -ArgumentList @(
-    "-batchmode","-nographics","-quit",
-    "-projectPath","$PWD",
-    "-logFile","$env:TEMP\unity-verify.log"
-  ) -Wait -PassThru
-$p.ExitCode   # 0 = OK
-```
-
-Errores de compilación aparecen en el log como `error CS....`.
-Un código de salida distinto de `0` indica fallo.
-
-> Nota: PowerShell **no espera** a `Unity.exe` con el operador `&` (es una app GUI).
-> Usa siempre `Start-Process -Wait` para poder leer el exit code.
-
----
-
-## Problemas conocidos
-
-**Unity se cierra al abrir el proyecto.**
-
-Causa: caché de paquetes corrupta. El Editor compila en batch y aborta sin aviso.
-
-Solución:
-
-```powershell
-# 1. Cerrar Unity por completo (verificar que no queden procesos)
-Get-Process Unity,UnityPackageManager -ErrorAction SilentlyContinue | Stop-Process -Force
-
-# 2. Limpiar caché de compilación y estado de paquetes
-Remove-Item ".\Library\PackageManager",".\Library\Bee",".\Library\ScriptAssemblies",
-            ".\Library\Artifacts" -Recurse -Force -ErrorAction SilentlyContinue
-
-# 3. Abrir de nuevo — Unity reextrae los paquetes
-```
-
-Si persiste, borrar `Library/` completo (se regenera, pero tarda más).
-
----
-
-## Licencia
-
-Unity Personal Edition.
+## Notas
+- El proyecto fue generado programáticamente mediante Unity CLI
+- Todos los componentes están configurados correctamente para XR
+- La escena está lista para ser utilizada en un dispositivo VR compatible con OpenXR
