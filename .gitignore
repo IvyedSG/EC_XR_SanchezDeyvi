@@ -1,0 +1,79 @@
+# ============================================================
+#  Unity — .gitignore
+#  Reglas estándar de Unity + exclusiones específicas del proyecto
+# ============================================================
+
+# --- Carpetas generadas por Unity (NUNCA versionar) ---------------
+# Contienen cache de assets, DLLs compilados y datos del editor.
+# Se regeneran solas al abrir el proyecto.
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+/[Aa]ssets/AssetStoreTools*
+
+# --- Archivos generados por IDEs ------------------------------------
+# Unity los re-crea en cada compilación. No deben versionarse.
+*.csproj
+*.unityproj
+*.sln
+*.slnx
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+.vs/
+.vscode/
+.idea/
+.consulo/
+*.code-workspace
+*.swp
+*~
+
+# --- Build artifacts ------------------------------------------------
+*.apk
+*.aab
+*.unitypackage
+*.app
+crashlytics-build.properties
+sysinfo.txt
+*.stackdump
+
+# --- Sistema operativo ---------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
+Desktop.ini
+
+# --- Sistema operativo / installers de plugins --------------------
+[Ii]nstallers/
+*.apk
+*.aab
+
+# --- Crashes de Unity ----------------------------------------------
+sysinfo.txt
+crashlytics-build.properties
+
+# --- Secrets / credenciales ----------------------------------------
+# Nunca deben subirse al repo
+*.keystore
+*.jks
+*.p12
+*.pfx
+*.mobileprovision
+.env
+.env.*
+secrets.json
+*ServiceAccount*.json
