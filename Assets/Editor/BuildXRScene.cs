@@ -9,6 +9,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Teleportation;
 using UnityEngine.XR.Interaction.Toolkit.Locomotion.Turning;
+using System;
 
 public static class BuildXRScene
 {
@@ -200,11 +201,35 @@ public static class BuildXRScene
         var cameraGO = new GameObject("Main Camera");
         cameraGO.tag = "MainCamera";
         cameraGO.transform.SetParent(xrOriginGO.transform);
-        cameraGO.transform.localPosition = new Vector3(0, 1.6f, -2);
+        cameraGO.transform.localPosition = Vector3.zero;
         var camera = cameraGO.AddComponent<Camera>();
         camera.clearFlags = CameraClearFlags.SolidColor;
         camera.backgroundColor = new Color(0.1f, 0.1f, 0.15f);
         xrOrigin.Camera = camera;
+
+        // TrackedPoseDriver - REQUIRED for XR camera tracking
+        var tpdType = Type.GetType("UnityEngine.InputSystem.XR.TrackedPoseDriver, Unity.InputSystem");
+        if (tpdType != null)
+        {
+            var tpd = cameraGO.AddComponent(tpdType) as MonoBehaviour;
+            if (tpd != null)
+            {
+                var trackingTypeField = tpdType.GetField("trackingType");
+                if (trackingTypeField != null)
+                {
+                    var trackingTypeEnum = trackingTypeField.FieldType;
+                    var rotationAndPosition = Enum.Parse(trackingTypeEnum, "RotationAndPosition");
+                    trackingTypeField.SetValue(tpd, rotationAndPosition);
+                }
+                var updateTypeField = tpdType.GetField("updateType");
+                if (updateTypeField != null)
+                {
+                    var updateTypeEnum = updateTypeField.FieldType;
+                    var updateAndBeforeRender = Enum.Parse(updateTypeEnum, "UpdateAndBeforeRender");
+                    updateTypeField.SetValue(tpd, updateAndBeforeRender);
+                }
+            }
+        }
 
         // Left Controller
         var leftControllerGO = new GameObject("Left Controller");
